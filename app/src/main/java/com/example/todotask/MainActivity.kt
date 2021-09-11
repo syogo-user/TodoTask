@@ -9,6 +9,7 @@ import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var mTaskAdapter: TaskAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -18,6 +19,25 @@ class MainActivity : AppCompatActivity() {
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
         }
+        mTaskAdapter = TaskAdapter(this@MainActivity)
+
+        listView1.setOnItemClickListener { parent, view, position, id ->
+            // listViewをタップ時
+        }
+
+        listView1.setOnItemLongClickListener{ parent, view, postion, id ->
+            // listViewを長押
+            true
+        }
+
+        reloadListView()
+    }
+
+    private fun reloadListView() {
+        val taskList = mutableListOf("aaaaaa","bbbbb","ccccc")
+        mTaskAdapter.taskList = taskList
+        listView1.adapter = mTaskAdapter
+        mTaskAdapter.notifyDataSetChanged()
     }
 
 }
